@@ -1,3 +1,5 @@
+import argparse
+from collections import deque
 
 CITIES = [
     "Oradea","Zerind","Arad","Timisoara","Lugoj","Mehadia","Drobeta","Craiova",
@@ -42,3 +44,40 @@ SLD_TO_BUCHAREST = {
     "Mehadia": 241, "Neamt": 234, "Oradea": 380, "Pitesti": 100, "Rimnicu Vilcea": 193,
     "Sibiu": 253, "Timisoara": 329, "Urziceni": 80, "Vaslui": 199, "Zerind": 374
 }
+
+def main():
+    print("started")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("start", choices=CITIES,  help="Starting city")
+    parser.add_argument("goal", choices=CITIES, help="Goal city")
+    parser.add_argument("algorithm", choices=["bfs"], help="Search algorithm to use")
+    args = parser.parse_args()
+    start = args.start
+    goal = args.goal
+    if args.algorithm == "bfs":
+        if start == goal:
+            print(f"Start is the same as goal: {start}")
+            return
+
+        queue = deque([(start, [start])])
+        seen = {start}          # mark when enqueued
+
+        while queue:
+            current_city, path = queue.popleft()
+
+            if current_city == goal:
+                print("Path found:", " -> ".join(path))
+                return
+
+            for neighbor in GRAPH[current_city]:
+                if neighbor not in seen:
+                    seen.add(neighbor)  # prevent duplicate enqueues
+                    queue.append((neighbor, path + [neighbor]))
+
+    print("No path found from", start, "to", goal)
+
+if __name__ == "__main__":
+    main()
+
+# Example usage:
+# python3 main.py Arad Bucharest bfs
