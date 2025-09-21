@@ -1,3 +1,5 @@
+import heapq
+
 def a_star_search(graph, start, goal, heuristic):
     """
     A* Search.

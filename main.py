@@ -1,6 +1,8 @@
 import argparse
 from collections import deque
-
+import breath_first
+import astar
+import bfs_greedy
 CITIES = [
     "Oradea","Zerind","Arad","Timisoara","Lugoj","Mehadia","Drobeta","Craiova",
     "Rimnicu Vilcea","Sibiu","Fagaras","Pitesti","Bucharest","Giurgiu",
@@ -50,31 +52,22 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("start", choices=CITIES,  help="Starting city")
     parser.add_argument("goal", choices=CITIES, help="Goal city")
-    parser.add_argument("algorithm", choices=["bfs"], help="Search algorithm to use")
+    parser.add_argument("algorithm", choices=["bfs", "a_star", "dfs","bfs_greedy"], help="Search algorithm to use")
     args = parser.parse_args()
     start = args.start
     goal = args.goal
     if args.algorithm == "bfs":
-        if start == goal:
-            print(f"Start is the same as goal: {start}")
-            return
-
-        queue = deque([(start, [start])])
-        seen = {start}          # mark when enqueued
-
-        while queue:
-            current_city, path = queue.popleft()
-
-            if current_city == goal:
-                print("Path found:", " -> ".join(path))
-                return
-
-            for neighbor in GRAPH[current_city]:
-                if neighbor not in seen:
-                    seen.add(neighbor)  # prevent duplicate enqueues
-                    queue.append((neighbor, path + [neighbor]))
-
-    print("No path found from", start, "to", goal)
+        print("Using BFS")
+        #implement BFS
+    if args.algorithm == "a_star":
+        print("Using A*")
+        #implement A*
+    if args.algorithm == "dfs":
+        print("Using DFS")
+        #implement DFS
+    if args.algorithm == "bfs_greedy":
+        print("Using BFS Greedy")
+        #implement BFS with Greedy 
 
 if __name__ == "__main__":
     main()
