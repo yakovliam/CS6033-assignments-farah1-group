@@ -3,6 +3,8 @@ from collections import deque
 import breath_first
 import astar
 import bfs_greedy
+import heuristic
+import summary
 CITIES = [
     "Oradea","Zerind","Arad","Timisoara","Lugoj","Mehadia","Drobeta","Craiova",
     "Rimnicu Vilcea","Sibiu","Fagaras","Pitesti","Bucharest","Giurgiu",
@@ -56,9 +58,12 @@ def main():
     args = parser.parse_args()
     start = args.start
     goal = args.goal
+    h = heuristic.heuristic(SLD_TO_BUCHAREST)
     if args.algorithm == "bfs":
         print("Using BFS")
-        #implement BFS
+        summarys = summary.time_repeated(100, breath_first.bfs, GRAPH, start, goal)
+        print(summarys)
+
     if args.algorithm == "a_star":
         print("Using A*")
         #implement A*
@@ -67,7 +72,8 @@ def main():
         #implement DFS
     if args.algorithm == "bfs_greedy":
         print("Using BFS Greedy")
-        #implement BFS with Greedy 
+        summarys = summary.time_repeated(100, bfs_greedy.best_first_search, GRAPH, start, goal, h)
+        print(summarys)
 
 if __name__ == "__main__":
     main()

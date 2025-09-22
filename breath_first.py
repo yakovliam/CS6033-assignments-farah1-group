@@ -1,27 +1,77 @@
-
-
+import time
 from collections import deque
-from main import GRAPH
+from typing import Dict, List, Tuple, Optional
 
+Graph = Dict[str, Dict[str, float]]
 
-def bfs(graph, start, goal):
+def bfs(
+    graph: Graph,
+    start: str,
+    goal: str,
+    *,
+    return_metrics: bool = False
+) -> List[str] | Tuple[List[str], dict]:
+    """
+    Breadth-First Search with optional metrics.
+    Returns path or (path, metrics) if return_metrics=True.
+    """
+    t0 = time.perf_counter()
+
     if start == goal:
-        print(f"Start is the same as goal: {start}")
-        return
+        t1 = time.perf_counter()
+        if return_metrics:
+            return [start], {
+                "found": True,
+                "expanded": 0,
+                "visited": 1,      # start only
+                "enqueued": 1,     # start
+                "max_frontier": 1, # queue size
+                "time_sec": t1 - t0,
+            }
+        return [start]
 
     queue = deque([(start, [start])])
-    seen = {start}          # mark when enqueued
+    seen = {start}
+
+    # metrics
+    expanded = 0
+    enqueued = 1
+    max_frontier = 1
 
     while queue:
+        max_frontier = max(max_frontier, len(queue))
         current_city, path = queue.popleft()
+        expanded += 1  # we are expanding `current_city`
 
         if current_city == goal:
-            print("Path found:", " -> ".join(path))
-            return
+            t1 = time.perf_counter()
+            if return_metrics:
+                return path, {
+                    "found": True,
+                    "expanded": expanded,
+                    "visited": len(seen),
+                    "enqueued": enqueued,
+                    "max_frontier": max_frontier,
+                    "time_sec": t1 - t0,
+                }
+            return path
 
-        for neighbor in graph[current_city]:
+        # graph is {city: {neighbor: distance, ...}}
+        for neighbor in graph.get(current_city, {}).keys():
             if neighbor not in seen:
-                seen.add(neighbor)  # prevent duplicate enqueues
+                seen.add(neighbor)
                 queue.append((neighbor, path + [neighbor]))
+                enqueued += 1
 
-    print("No path found from", start, "to", goal)
+    # no path
+    t1 = time.perf_counter()
+    if return_metrics:
+        return [], {
+            "found": False,
+            "expanded": expanded,
+            "visited": len(seen),
+            "enqueued": enqueued,
+            "max_frontier": max_frontier,
+            "time_sec": t1 - t0,
+        }
+    return []
