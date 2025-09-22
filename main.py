@@ -67,7 +67,8 @@ def main():
 
     if args.algorithm == "a_star":
         print("Using A*")
-        #implement A*
+        summarys = summary.time_repeated(100, astar.a_star_search, GRAPH, start, goal, h)
+        print(summarys)
     if args.algorithm == "dfs":
         print("Using DFS")
         path = depth_first.depth_first_search(GRAPH, start, goal)
