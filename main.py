@@ -3,6 +3,7 @@ from collections import deque
 import breath_first
 import astar
 import bfs_greedy
+import depth_first
 CITIES = [
     "Oradea","Zerind","Arad","Timisoara","Lugoj","Mehadia","Drobeta","Craiova",
     "Rimnicu Vilcea","Sibiu","Fagaras","Pitesti","Bucharest","Giurgiu",
@@ -64,7 +65,8 @@ def main():
         #implement A*
     if args.algorithm == "dfs":
         print("Using DFS")
-        #implement DFS
+        path = depth_first.depth_first_search(GRAPH, start, goal)
+        print("DFS path:", " -> ".join(path) if path else "No path")
     if args.algorithm == "bfs_greedy":
         print("Using BFS Greedy")
         #implement BFS with Greedy 
