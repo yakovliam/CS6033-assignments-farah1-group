@@ -40,8 +40,8 @@ def best_first_search(
     visited = set()
 
     # Metrics
-    expanded = 0          # times we pop from frontier and process neighbors
-    enqueued = 1          # items pushed to frontier
+    expanded = 0          
+    enqueued = 1          
     max_frontier = 1
 
     while frontier:
@@ -66,7 +66,7 @@ def best_first_search(
                 }
             return path
 
-        # graph is {city: {neighbor: distance, ...}, ...}
+      
         for neighbor, _cost in graph.get(current, {}).items():
             if neighbor not in visited:
                 heapq.heappush(frontier, (heuristic(neighbor, goal), neighbor, path + [neighbor]))

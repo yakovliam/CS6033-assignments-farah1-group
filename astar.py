@@ -33,7 +33,6 @@ def a_star_search(
             }
         return [start]
 
-    # heap items: (f, g, node, path)
     start_h = heuristic(start, goal)
     frontier: List[Tuple[float, float, str, List[str]]] = [(start_h, 0.0, start, [start])]
     g_score: Dict[str, float] = {start: 0.0}
@@ -48,7 +47,7 @@ def a_star_search(
         max_frontier = max(max_frontier, len(frontier))
         f, g, current, path = heapq.heappop(frontier)
 
-        # If this entry is stale (we’ve since found a better g), skip it
+ 
         if g > g_score.get(current, float("inf")):
             continue
 
@@ -66,7 +65,7 @@ def a_star_search(
                 }
             return path
 
-        # graph is {city: {neighbor: distance, ...}}
+       
         for neighbor, cost in graph.get(current, {}).items():
             tentative_g = g + cost
             if tentative_g < g_score.get(neighbor, float("inf")):

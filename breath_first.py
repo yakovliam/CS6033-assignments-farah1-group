@@ -41,7 +41,7 @@ def bfs(
     while queue:
         max_frontier = max(max_frontier, len(queue))
         current_city, path = queue.popleft()
-        expanded += 1  # we are expanding `current_city`
+        expanded += 1  
 
         if current_city == goal:
             t1 = time.perf_counter()
@@ -56,14 +56,14 @@ def bfs(
                 }
             return path
 
-        # graph is {city: {neighbor: distance, ...}}
+        
         for neighbor in graph.get(current_city, {}).keys():
             if neighbor not in seen:
                 seen.add(neighbor)
                 queue.append((neighbor, path + [neighbor]))
                 enqueued += 1
 
-    # no path
+
     t1 = time.perf_counter()
     if return_metrics:
         return [], {
