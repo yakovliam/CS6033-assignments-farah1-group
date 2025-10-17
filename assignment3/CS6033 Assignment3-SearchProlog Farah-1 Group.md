@@ -142,7 +142,7 @@ path_cost([City1, City2|Rest], Cost) :-
 
 ---
 
-## **6. Running Tests**
+## 6. Running Tests
 
 ```prolog
 % Test all three algorithms from given cities
@@ -165,23 +165,18 @@ run_tests :-
 
 ---
 
-## **7. Correctness & Efficiency Discussion**
+## 7. Correctness & Efficiency Discussion
 
-- **BFS** finds the shortest path in terms of number of edges, but not necessarily the least cost.
-- **DFS** may find a path faster in some cases but can go deep into irrelevant branches.
-- **A*** finds the least-cost path efficiently using heuristics, and is optimal if the heuristic is admissible (SLD is admissible here).
+- BFS finds the shortest path in terms of number of edges, but not necessarily the least cost.
+- DFS may find a path faster in some cases but can go deep into irrelevant branches.
+- A* finds the least-cost path efficiently using heuristics, and is optimal if the heuristic is admissible (SLD is admissible here).
 
 From the tests:
-- **Oradea** and **Timisoara** will have valid paths.
-- **Neamt** will also reach Bucharest via Iasi → Vaslui → Urziceni → Bucharest.
+- Oradea and Timisoara will have valid paths.
+- Neamt will also reach Bucharest via Iasi → Vaslui → Urziceni → Bucharest.
 - BFS and A* paths will be optimal in cost for A*, and in steps for BFS.
 - DFS might return a longer path cost-wise.
 
 ---
 
-To run:
-```prolog
-?- run_tests.
-```
-
-This will output paths and costs for all three algorithms from each start city.
+Output:
