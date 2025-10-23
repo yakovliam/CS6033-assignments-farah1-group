@@ -179,4 +179,45 @@ From the tests:
 
 ---
 
-Output:
+
+
+## Output:
+
+
+### From **Oradea** to **Bucharest**
+- **BFS:**  
+  Path = [bucharest, fagaras, sibiu, oradea]  
+  Cost = 461  
+- **DFS:**  
+  Path = [bucharest, fagaras, sibiu, oradea]  
+  Cost = 461  
+- **A***:  
+  Path = [bucharest, pitesti, rimnicu_vilcea, sibiu, oradea]  
+  Cost = 429  
+
+---
+
+### From **Timisoara** to **Bucharest**
+- **BFS:**  
+  Path = [bucharest, fagaras, sibiu, arad, timisoara]  
+  Cost = 568  
+- **DFS:**  
+  Path = [bucharest, pitesti, rimnicu_vilcea, craiova, drobeta, mehadia, lugoj, timisoara]  
+  Cost = 720  
+- **A***:  
+  Path = [bucharest, fagaras, sibiu, arad, timisoara]  
+  Cost = 568  
+
+---
+
+### From **Neamt** to **Bucharest**
+- **BFS:**  
+  Path = [bucharest, urziceni, vaslui, iasi, neamt]  
+  Cost = 406  
+- **DFS:**  
+  Path = [bucharest, urziceni, vaslui, iasi, neamt]  
+  Cost = 406  
+- **A***:  
+  Path = [bucharest, urziceni, vaslui, iasi, neamt]  
+  Cost = 406  
+
