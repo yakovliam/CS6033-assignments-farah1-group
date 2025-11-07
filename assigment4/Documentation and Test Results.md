@@ -38,6 +38,54 @@ b is on table
 d is clear
 ```
 
+![alt text](image.png)
+
+**Start State:**
+
+```
+a is on table
+b is on table
+c is on a
+d is on c
+b is clear
+d is clear
+```
+
+**Goal State:**
+
+```
+a is on b
+b is on c
+c is on d
+d is on table
+a is clear
+```
+
+![alt text](image-1.png)
+
+**Start State:**
+
+```
+a is on b
+b is on table
+c is on table
+d is on c
+a is clear
+d is clear
+```
+
+**Goal State:**
+
+```
+a is on c
+c is on d
+d is on b
+b is on table
+a is clear
+```
+
+![alt text](image-2.png)
+
 **Sample Solution Path:**
 The program finds a sequence of moves that transforms the start state into the goal state. The solution demonstrates:
 

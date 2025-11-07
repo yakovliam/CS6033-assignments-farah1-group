@@ -4,21 +4,8 @@ blocks([a,b,c,d]).
 block(X) :- blocks(BS), member(X, BS).
 
 % START and GOAL facts 
-start([
-  [on,a,b],
-  [on,b,table],
-  [on,c,d],
-  [clear,c],
-  [clear,a],
-  [on,d,table]
-]).
-goal([
-  [on,d,a],
-  [on,a,c],
-  [on,c,b],
-  [on,b,table],
-  [clear,d]
-]).
+start([[on,a,b],[on,b,table],[on,c,table],[on,d,c],[clear,a],[clear,d]]).
+goal([[on,a,c],[on,c,d],[on,d,b],[on,b,table],[clear,a]]).
 
 % Helpers 
 notequal(X,X) :- !, fail.
